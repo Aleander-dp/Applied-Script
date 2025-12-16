@@ -29,5 +29,7 @@ ip a | grep inet
 
 echo
 echo "=== LÄGG TILL FLERA TESTER  ==="
-
+echo "Detta är ett test"
+date
+uptime
 
