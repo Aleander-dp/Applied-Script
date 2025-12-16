@@ -1,6 +1,4 @@
-#Mina Scrip
+# Mina Scrip
 
-Detta script ger grundläggande information om enheten den används på.
-Detta inkluderar användare, operativsystem, nätverksinformation, datum & hur länge enheten har varit på.
+Här kommer jag att ladda upp alla min övningar som genomförts under applied Script kursen!
 
-Använd: ./ovning_script1.sh i terminal för att köra script.
