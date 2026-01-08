@@ -1,19 +1,20 @@
 import platform
 
+
 system = platform.system()
 
-def Hitta_operativsystem():
+def main():
 
-    if system == "Windows" :
+    if system != "Linux" :
         print("||---------------------------------------------------||")
         print(f"Operativsystemet {system} har identifierats.")
-        print("||---------------------------------------------------||")
-    elif system == "Linux":
-        print(f"")
-    elif system == "Darwin":
-        print(f"")
-    else:
-        print("||---------------------------------------------------||")
-        print("Kan inte indentifiera operativsystem, Avslutar process.")
+        print("Script godkänns och körs.")
         print("||---------------------------------------------------||")
 
+    else:
+        print("||---------------------------------------------------||")
+        print("Du har , Avslutar process.")
+        print("||---------------------------------------------------||")
+
+if __name__ == "__main__":
+    main()
