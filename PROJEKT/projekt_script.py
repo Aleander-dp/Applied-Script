@@ -8,12 +8,13 @@ def main():
     if system != "Linux" :
         print("||---------------------------------------------------||")
         print(f"Operativsystemet {system} har identifierats.")
-        print("Script godkänns och körs.")
+        print("Script nekas. Linux krävs för detta script.")
         print("||---------------------------------------------------||")
 
     else:
         print("||---------------------------------------------------||")
-        print("Du har , Avslutar process.")
+        print(f"Du har operativsystemet {system}.")
+        print("Script körs.")
         print("||---------------------------------------------------||")
 
 if __name__ == "__main__":
