@@ -3,20 +3,22 @@ import time
 
 
 def suidkoll():
+
+    suid_files = []
+    print("||-------------------------------------||")
+    print("Påbörjar [SUID] kontroll")
+    print("||-------------------------------------||")
     
     try:
         i = 3
-        j = 1
-        print("||-------------------------------------||")
-        print("Påbörjar SUID kontroll")
-        print("||-------------------------------------||")
-
         result = subprocess.run(
             ["find", "/", "-perm", "-4000", "-type", "f"],
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
             text=True
         )
+        
+        
         suid_files = result.stdout.strip().split("\n")
 
         if suid_files and suid_files[0] != "":
@@ -34,7 +36,8 @@ def suidkoll():
                 i = i - 1
                 print(f"...{i} sekund(er)")               
                 if i == 0:
-                    break     
+                    break    
+        return [f for f in suid_files if f] 
     
     except Exception as e:
         
@@ -42,5 +45,8 @@ def suidkoll():
         print("[[Error]]")
         print("Kunde inte utföra SUID kontroll.")
         print("||-------------------------------------||")
+        return []
+    
+
         
 

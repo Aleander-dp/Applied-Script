@@ -4,16 +4,20 @@ import platform
 SENASTE_KERNEL = "6.18.4"
 
 def kolla_kernel_version():
-    
+
+    aktuell_kernel = "okänd"
+    print("||-------------------------------------||")
+    print("Påbörjar [Kernel] kontroll")
+    print("||-------------------------------------||")
     
     try:
         print("kontrollera senaste Kernel: versionskontroll")
 
-        current_kernel = platform.release()
-        print(f"Aktuell kernel: {current_kernel}")
+        aktuell_kernel = platform.release()
+        print(f"Aktuell kernel: {aktuell_kernel}")
         print(f"Senast kända kernel: {SENASTE_KERNEL}")
 
-        if current_kernel.startswith(SENASTE_KERNEL):
+        if aktuell_kernel.startswith(SENASTE_KERNEL):
             print("Kernel är uppdaterad")
         else:
             print("||------------------------------------||")
@@ -23,4 +27,8 @@ def kolla_kernel_version():
     except Exception as e:
         print("Kunde inte utföra kernel versionskontroll")
 
-kolla_kernel_version()
+    return {
+        "current": aktuell_kernel,
+        "latest": SENASTE_KERNEL,
+        "secure": aktuell_kernel.startswith(SENASTE_KERNEL)
+    }
