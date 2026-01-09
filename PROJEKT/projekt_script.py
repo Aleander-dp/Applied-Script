@@ -47,16 +47,14 @@ def main():
             print("||---------------------------------------------------||")
 
         suid_files = suidkoll()
-        if suid_files:
-            log(f"SUID-filer hittade: {len(suid_files)}")
-            for f in suid_files:
-                log(f"SUID: {f}")
+        log(f"SUID-filer hittade: {len(suid_files)}")
+        for f in suid_files:
+            log(f"SUID: {f}")
 
         kernel = kolla_kernel_version()
-        if kernel:
-            log(f"Kernel: {kernel['current']} | Senaste: {kernel['latest']}")
-            if not kernel["secure"]:
-                log("VARNING: Kernel ej uppdaterad")
+        log(f"Kernel: {kernel['current']} | Senaste: {kernel['latest']}")
+        if not kernel["secure"]:
+            log("VARNING: Kernel ej uppdaterad")
 
         uid0 = uid0_användare_check()
         if "error" in uid0:
