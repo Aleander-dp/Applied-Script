@@ -18,7 +18,6 @@ def suidkoll():
             text=True
         )
         
-        
         suid_files = result.stdout.strip().split("\n")
 
         if suid_files and suid_files[0] != "":
