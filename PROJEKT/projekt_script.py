@@ -7,9 +7,12 @@ from funktioner.uid0 import uid0_användare_check
 
 system = platform.system()
 
-LOG_FIL = "logs/scan.log"
+import os
 
-os.makedirs("logs", exist_ok=True)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_FIL = os.path.join(BASE_DIR, "logs", "scan.log")
+
+os.makedirs(os.path.join(BASE_DIR, "logs"), exist_ok=True)
 
 if not os.path.exists(LOG_FIL):
     open(LOG_FIL, "a", encoding="utf-8").close()
@@ -18,6 +21,16 @@ def log(msg):
     with open(LOG_FIL, "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now()}] {msg}\n")
 
+"""LOG_FIL = "logs/scan.log"
+
+
+with open(LOG_FIL, "a", encoding="utf-8") as f:
+    f.write("test")
+"""
+def log(msg):
+    with open("scan.log", "a", encoding="utf-8") as f:
+        f.write(f"[{datetime.now()}] {msg}\n") 
+     
 def main():
     try:
         if system != "Windows" :
@@ -34,14 +47,16 @@ def main():
             print("||---------------------------------------------------||")
 
         suid_files = suidkoll()
-        log(f"SUID-filer hittade: {len(suid_files)}")
-        for f in suid_files:
-            log(f"SUID: {f}")
+        if suid_files:
+            log(f"SUID-filer hittade: {len(suid_files)}")
+            for f in suid_files:
+                log(f"SUID: {f}")
 
         kernel = kolla_kernel_version()
-        log(f"Kernel: {kernel['current']} | Senaste: {kernel['latest']}")
-        if not kernel["secure"]:
-            log("VARNING: Kernel ej uppdaterad")
+        if kernel:
+            log(f"Kernel: {kernel['current']} | Senaste: {kernel['latest']}")
+            if not kernel["secure"]:
+                log("VARNING: Kernel ej uppdaterad")
 
         uid0 = uid0_användare_check()
         if "error" in uid0:
@@ -56,7 +71,7 @@ def main():
         exit()
     
     except Exception as e:
-        print("Ett fel har uppstått, avslutar.")
+        print("Ett fel har uppstått.", e)
         exit()
 
 

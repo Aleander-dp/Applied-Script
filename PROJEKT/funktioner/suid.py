@@ -24,6 +24,7 @@ def suidkoll():
             print("[!] Följande filer har SUID-bit satt:")
             for file in suid_files:
                 print(f"    {file}")
+                return [f for f in suid_files if f] 
         
         else:
             print("||--------------------------------------||")
@@ -36,7 +37,6 @@ def suidkoll():
                 print(f"...{i} sekund(er)")               
                 if i == 0:
                     break    
-        return [f for f in suid_files if f] 
     
     except Exception as e:
         
