@@ -26,14 +26,14 @@ def log(msg):
 
 with open(LOG_FIL, "a", encoding="utf-8") as f:
     f.write("test")
-"""
+
 def log(msg):
     with open("scan.log", "a", encoding="utf-8") as f:
-        f.write(f"[{datetime.now()}] {msg}\n") 
+        f.write(f"[{datetime.now()}] {msg}\n")  """
      
 def main():
     try:
-        if system != "Linux" :
+        if system != "Windows" :
             print("||---------------------------------------------------||")
             print(f"Operativsystemet {system} har identifierats.")
             print("Script nekas. Linux krävs för detta script.")

@@ -24,7 +24,7 @@ def suidkoll():
             print("[!] Följande filer har SUID-bit satt:")
             for file in suid_files:
                 print(f"    {file}")
-                return [f for f in suid_files if f] 
+            
         
         else:
             print("||--------------------------------------||")
@@ -33,16 +33,17 @@ def suidkoll():
             print("||-------------------------------------||")
             while i >= 0:
                 time.sleep(1)
-                i = i - 1
+                i -= i
                 print(f"...{i} sekund(er)")               
                 if i == 0:
-                    break    
+                    break  
+        return suid_files  
     
     except Exception as e:
         
         print("||-------------------------------------||")
         print("[[Error]]")
-        print("Kunde inte utföra SUID kontroll.")
+        print("Kunde inte utföra SUID kontroll.", e)
         print("||-------------------------------------||")
         return []
     
