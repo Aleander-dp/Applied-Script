@@ -33,7 +33,7 @@ def log(msg):
      
 def main():
     try:
-        if system != "Windows" :
+        if system != "Linux" :
             print("||---------------------------------------------------||")
             print(f"Operativsystemet {system} har identifierats.")
             print("Script nekas. Linux krävs för detta script.")
