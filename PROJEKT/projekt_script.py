@@ -1,6 +1,7 @@
 import platform
 import os
-from datetime import datetime
+import sys
+from datetime import datetime, date
 from funktioner.suid import suidkoll
 from funktioner.kernel import kolla_kernel_version
 from funktioner.uid0 import uid0_användare_check
@@ -20,6 +21,14 @@ if not os.path.exists(LOG_FIL):
 def log(msg):
     with open(LOG_FIL, "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now()}] {msg}\n")
+
+def logger(msg):
+    with open(LOG_FIL, "a", encoding="utf-8") as f:
+        f.write(f"{msg}")
+
+datum = date.today()
+start_msg = "|------------------------------------|\nLoggning startad {datum}"
+slut_msg = "Loggning avslutas.\n|------------------------------------|"
 
 """LOG_FIL = "logs/scan.log"
 
@@ -46,6 +55,21 @@ def main():
             print("Script tillåts & körs.")
             print("||---------------------------------------------------||")
 
+        if os.geteuid() != 0:
+            print(f"UID =  {os.geteuid()}")
+            print("||---------------------------------------------------||")
+            print("Du är inte en root användare. Vill du fortsätta ändå?")
+            while True:
+                val = input("[J]/[N]\n")
+                if val in ["j", "ja"]:
+                    break
+                elif val in ["nej", "n", "ne"]:
+                    print("Avslutar")
+                    exit()
+                else:
+                    print("Ogiltigt svar")
+
+        logger(f"{start_msg}\n")
         suid_files = suidkoll()
         log(f"SUID-filer hittade: {len(suid_files)}")
         for f in suid_files:
@@ -63,6 +87,8 @@ def main():
             log(f"UID 0-användare: {', '.join(uid0['users'])}")
             if not uid0["secure"]:
                 log("VARNING: Fler än root har UID 0")
+
+        logger(slut_msg)
 
         print("Kontroller utförda... [suid] [kernel] [uid0]")
         print("Avslutar")
