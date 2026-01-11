@@ -6,42 +6,35 @@ from funktioner.suid import suidkoll
 from funktioner.kernel import kolla_kernel_version
 from funktioner.uid0 import uid0_användare_check
 
+# relevanta veriabler för att scriptet ska fungera
 system = platform.system()
-
-import os
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_FIL = os.path.join(BASE_DIR, "logs", "scan.log")
-
 os.makedirs(os.path.join(BASE_DIR, "logs"), exist_ok=True)
 
+# skapar log fil om den inte finns i mappen "logs".
 if not os.path.exists(LOG_FIL):
     open(LOG_FIL, "a", encoding="utf-8").close()
 
+#Funktion för hur information ska loggas in i log filen.
 def log(msg):
     with open(LOG_FIL, "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now()}] {msg}\n")
 
+#Funktion för start och slutmeddelandet i logfilen.
 def logger(msg):
     with open(LOG_FIL, "a", encoding="utf-8") as f:
-        f.write(f"{msg}")
+        f.write(msg)
 
+#variabler för logmeddelanden.
 datum = date.today()
-start_msg = "|------------------------------------|\nLoggning startad {datum}"
+start_msg = "|------------------------------------|\nLoggning startad "
 slut_msg = "Loggning avslutas.\n|------------------------------------|"
 
-"""LOG_FIL = "logs/scan.log"
-
-
-with open(LOG_FIL, "a", encoding="utf-8") as f:
-    f.write("test")
-
-def log(msg):
-    with open("scan.log", "a", encoding="utf-8") as f:
-        f.write(f"[{datetime.now()}] {msg}\n")  """
-     
+#main funktion
 def main():
     try:
+        #kollar operativsystem. Om inte "Linux", exit.
         if system != "Linux" :
             print("||---------------------------------------------------||")
             print(f"Operativsystemet {system} har identifierats.")
@@ -55,6 +48,7 @@ def main():
             print("Script tillåts & körs.")
             print("||---------------------------------------------------||")
 
+        #Kollar användar id.
         if os.geteuid() != 0:
             print(f"UID =  {os.geteuid()}")
             print("||---------------------------------------------------||")
@@ -69,17 +63,21 @@ def main():
                 else:
                     print("Ogiltigt svar")
 
-        logger(f"{start_msg}\n")
+        
+        #Loggar startmeddelandet + skannar datorn efter SUID-filer, loggar resultatet.
+        logger(f"\n{start_msg}" + f"{datum}" + "\n")
         suid_files = suidkoll()
         log(f"SUID-filer hittade: {len(suid_files)}")
         for f in suid_files:
             log(f"SUID: {f}")
-
+        
+        #Kollar systemet efter kernel version och meddelar om den behöver uppdateras.
         kernel = kolla_kernel_version()
         log(f"Kernel: {kernel['current']} | Senaste: {kernel['latest']}")
         if not kernel["secure"]:
             log("VARNING: Kernel ej uppdaterad")
-
+        
+        #Kollar alla UID0 användare på enheten (borde bara vara en, UID0).
         uid0 = uid0_användare_check()
         if "error" in uid0:
             log(uid0["error"])
@@ -88,14 +86,15 @@ def main():
             if not uid0["secure"]:
                 log("VARNING: Fler än root har UID 0")
 
+        #loggar slutmeddelandet, avslutar scriptet.
         logger(slut_msg)
-
         print("Kontroller utförda... [suid] [kernel] [uid0]")
         print("Avslutar")
         exit()
     
+    #Om fel har uppstått, printar fel till terminal.
     except Exception as e:
-        print("Ett fel har uppstått.", e)
+        print("Ett fel har uppstått:" , e)
         exit()
 
 
