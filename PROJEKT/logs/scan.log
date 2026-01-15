@@ -1,1 +1,43 @@
 
+
+|------------------------------------|
+Loggning startad 2026-01-15
+[2026-01-15 10:46:01.401444] SUID-filer hittade: 33
+[2026-01-15 10:46:01.401608] SUID: /usr/sbin/pppd
+[2026-01-15 10:46:01.401641] SUID: /usr/sbin/mount.nfs
+[2026-01-15 10:46:01.401666] SUID: /usr/sbin/mount.cifs
+[2026-01-15 10:46:01.401689] SUID: /usr/lib/xorg/Xorg.wrap
+[2026-01-15 10:46:01.401710] SUID: /usr/lib/polkit-1/polkit-agent-helper-1
+[2026-01-15 10:46:01.401732] SUID: /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+[2026-01-15 10:46:01.401751] SUID: /usr/lib/chromium/chrome-sandbox
+[2026-01-15 10:46:01.401771] SUID: /usr/lib/openssh/ssh-keysign
+[2026-01-15 10:46:01.401791] SUID: /usr/bin/passwd
+[2026-01-15 10:46:01.401811] SUID: /usr/bin/kismet_cap_rz_killerbee
+[2026-01-15 10:46:01.401833] SUID: /usr/bin/kismet_cap_ti_cc_2531
+[2026-01-15 10:46:01.401904] SUID: /usr/bin/rsh-redone-rsh
+[2026-01-15 10:46:01.401933] SUID: /usr/bin/kismet_cap_nxp_kw41z
+[2026-01-15 10:46:01.401957] SUID: /usr/bin/umount
+[2026-01-15 10:46:01.401980] SUID: /usr/bin/ntfs-3g
+[2026-01-15 10:46:01.402001] SUID: /usr/bin/su
+[2026-01-15 10:46:01.402020] SUID: /usr/bin/newgrp
+[2026-01-15 10:46:01.402040] SUID: /usr/bin/chfn
+[2026-01-15 10:46:01.402059] SUID: /usr/bin/kismet_cap_nrf_51822
+[2026-01-15 10:46:01.402080] SUID: /usr/bin/kismet_cap_linux_wifi
+[2026-01-15 10:46:01.402099] SUID: /usr/bin/kismet_cap_ti_cc_2540
+[2026-01-15 10:46:01.402119] SUID: /usr/bin/kismet_cap_nrf_52840
+[2026-01-15 10:46:01.402138] SUID: /usr/bin/gpasswd
+[2026-01-15 10:46:01.402158] SUID: /usr/bin/kismet_cap_ubertooth_one
+[2026-01-15 10:46:01.402177] SUID: /usr/bin/fusermount3
+[2026-01-15 10:46:01.402196] SUID: /usr/bin/pkexec
+[2026-01-15 10:46:01.402216] SUID: /usr/bin/rsh-redone-rlogin
+[2026-01-15 10:46:01.402235] SUID: /usr/bin/kismet_cap_linux_bluetooth
+[2026-01-15 10:46:01.402254] SUID: /usr/bin/chsh
+[2026-01-15 10:46:01.402273] SUID: /usr/bin/mount
+[2026-01-15 10:46:01.402292] SUID: /usr/bin/sudo
+[2026-01-15 10:46:01.402311] SUID: /usr/bin/kismet_cap_nrf_mousejack
+[2026-01-15 10:46:01.402330] SUID: /usr/bin/kismet_cap_hak5_wifi_coconut
+[2026-01-15 10:46:01.402411] Kernel: 6.12.38+kali-amd64 | Senaste: 6.18.4
+[2026-01-15 10:46:01.402433] VARNING: Kernel ej uppdaterad
+[2026-01-15 10:46:01.402620] UID 0-användare: root
+Loggning avslutas.
+|------------------------------------|
