@@ -1,3 +1,14 @@
+#!/usr/bin/env python3
+# FEEDBACK - Code Review:
+# 
+# Bra jobbat! Koden är välstrukturerad och lätt att följa.
+# 
+# Förbättringsförslag:
+# 1. Shebang (#!/usr/bin/env python3) är nu tillagd längst upp så scriptet kan 
+#    köras direkt med ./projekt_script.py (kräver chmod +x projekt_script.py)
+# 
+# 2. README.md kan utökas med: Syfte/Mål, Funktion, Systemkrav och Instruktioner
+
 import platform
 import os
 import sys
@@ -54,6 +65,7 @@ def main():
             print("||---------------------------------------------------||")
             print("Du är inte en root användare. Vill du fortsätta ändå?")
             while True:
+                # FEEDBACK: Lägg till .lower() för att hantera både "J" och "j"
                 val = input("[J]/[N]\n")
                 if val in ["j", "ja"]:
                     break
