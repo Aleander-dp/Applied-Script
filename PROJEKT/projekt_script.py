@@ -42,8 +42,36 @@ datum = date.today()
 start_msg = "|------------------------------------|\nLoggning startad "
 slut_msg = "Loggning avslutas.\n|------------------------------------|"
 
+def skriv_hjalp():
+    print("Användning: python scan.py [alternativ]")
+    print()
+    print("Alternativ:")
+    print("  -h        Visa denna hjälptext")
+    print("  -v        Visa information om scriptet")
+    print()
+    print("Scriptet kontrollerar:")
+    print("  - SUID-filer")
+    print("  - Kernelversion och om den är uppdaterad")
+    print("  - Användare med UID 0")
+
+def skriv_info():
+    print("Informationsläge (-v):")
+    print("Detta script loggar säkerhetsrelaterad information till logs/scan.log")
+    print("Kontroller som görs: SUID, kernelversion, UID 0-användare.")
+
 #main funktion
 def main():
+    
+    # hanterar flaggor
+    args = [a.lower() for a in sys.argv[1:]]
+    
+    if "-h" in args or "-help" in args:
+            skriv_hjalp()
+            sys.exit(0)
+    if "-v" in args or "-version" in args:
+            skriv_info()
+            sys.exit(0)
+    
     try:
         #kollar operativsystem. Om inte "Linux", exit.
         if system != "Linux" :
@@ -77,27 +105,38 @@ def main():
 
         
         #Loggar startmeddelandet + skannar datorn efter SUID-filer, loggar resultatet.
-        logger(f"\n{start_msg}" + f"{datum}" + "\n")
-        suid_files = suidkoll()
-        log(f"SUID-filer hittade: {len(suid_files)}")
-        for f in suid_files:
-            log(f"SUID: {f}")
-        
-        #Kollar systemet efter kernel version och meddelar om den behöver uppdateras.
-        kernel = kolla_kernel_version()
-        log(f"Kernel: {kernel['current']} | Senaste: {kernel['latest']}")
-        if not kernel["secure"]:
-            log("VARNING: Kernel ej uppdaterad")
-        
-        #Kollar alla UID0 användare på enheten (borde bara vara en, UID0).
-        uid0 = uid0_användare_check()
-        if "error" in uid0:
-            log(uid0["error"])
-        else:
-            log(f"UID 0-användare: {', '.join(uid0['users'])}")
-            if not uid0["secure"]:
-                log("VARNING: Fler än root har UID 0")
+        try: 
+            logger(f"\n{start_msg}" + f"{datum}" + "\n")
+            suid_files = suidkoll()
+            log(f"SUID-filer hittade: {len(suid_files)}")
+            for f in suid_files:
+                log(f"SUID: {f}")
+        except Exception as e:
+            log(f"Fel vid SUID-kontroll: {e}")
+            print("Ett fel uppstod vid SUID-kontroll, se loggfilen för fel-information")
 
+        #Kollar systemet efter kernel version och meddelar om den behöver uppdateras.
+        try:
+            kernel = kolla_kernel_version()
+            log(f"Kernel: {kernel['current']} | Senaste: {kernel['latest']}")
+            if not kernel["secure"]:
+                log("VARNING: Kernel ej uppdaterad")
+        except Exception as e:
+            log(f"Fel vid Kernel-kontroll: {e}")
+            print("Ett fel uppsod vid Kernel-kontroll, se loggfil för fel-information")
+
+        #Kollar alla UID0 användare på enheten (borde bara vara en, UID0).
+        try:
+            uid0 = uid0_användare_check()
+            if "error" in uid0:
+                log(uid0["error"])
+            else:
+                log(f"UID 0-användare: {', '.join(uid0['users'])}")
+                if not uid0["secure"]:
+                    log("VARNING: Fler än root har UID 0")
+        except Exception as e:
+            log(f"Fel vid UID0-kontroll: {e}")
+            print("Ett fel uppstod vid uid0-kontroll, se loggfil för fel-information")
         #loggar slutmeddelandet, avslutar scriptet.
         logger(slut_msg)
         print("Kontroller utförda... [suid] [kernel] [uid0]")
