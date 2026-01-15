@@ -1,8 +1,1 @@
-[2026-01-09 12:57:57.261683] Kernel: 11 | Senaste: 6.18.4
-[2026-01-09 12:57:57.262372] VARNING: Kernel ej uppdaterad
-[2026-01-09 12:57:57.264029] Kunde inte läsa /etc/passwd
-[2026-01-09 13:53:59.475928] SUID-filer hittade: 1
-[2026-01-09 13:53:59.476600] SUID: 
-[2026-01-09 13:53:59.479253] Kernel: 11 | Senaste: 6.18.4
-[2026-01-09 13:53:59.480141] VARNING: Kernel ej uppdaterad
-[2026-01-09 13:53:59.481198] Kunde inte läsa /etc/passwd
+
