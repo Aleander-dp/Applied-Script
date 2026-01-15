@@ -94,7 +94,7 @@ def main():
             print("Du är inte en root användare. Vill du fortsätta ändå?")
             while True:
                 # FEEDBACK: Lägg till .lower() för att hantera både "J" och "j"
-                val = input("[J]/[N]\n")
+                val = input("[J]/[N]\n").strip().lower()
                 if val in ["j", "ja"]:
                     break
                 elif val in ["nej", "n", "ne"]:
