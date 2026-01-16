@@ -8,6 +8,8 @@
 #    köras direkt med ./projekt_script.py (kräver chmod +x projekt_script.py)
 # 
 # 2. README.md kan utökas med: Syfte/Mål, Funktion, Systemkrav och Instruktioner
+# 3. Kan vara bra att nämna att senaste kernel är ett fast värde och måste ändras manuellt vid varje updatering.
+#    Antingen i din README eller som kommentar i skriptet
 
 import platform
 import os
